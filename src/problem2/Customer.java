@@ -1,6 +1,5 @@
 package problem2;
 
-import problem1.Item;
 
 import java.util.ArrayList;
 
@@ -20,13 +19,4 @@ public class Customer {
         return transactions;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder customer =  new StringBuilder("Customer: " + name);
-        customer.append("\nTransactions: ");
-        for (double transaction : transactions){
-            customer.append("\n- ").append(transaction);
-        }
-        return customer.toString() ;
-    }
 }

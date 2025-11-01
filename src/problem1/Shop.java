@@ -27,13 +27,15 @@ public class Shop
             item = new Item(itemName,itemPrice,quantity);
             cart.add(item) ;
             // *** print the contents of the cart object using println
-            // System.out.println(cart) ;
+            // System.out.println(cart) ;  // using this, the output doesn't look very good, and we want to compute the total price as well
+
 
             System.out.println("Items in the cart: ");
             for (Item i : cart){
                 System.out.println(i);
             }
 
+            // computing and printing the total price
             double totalPrice=0;
             for (Item i : cart){
                 totalPrice+= i.getQuantity() * i.getPrice() ;

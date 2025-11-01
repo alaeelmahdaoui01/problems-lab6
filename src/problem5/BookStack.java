@@ -15,10 +15,12 @@ public class BookStack {
 
     public Book pop() {
         // code here and don't to test if it's empty
+        return null ;
     }
 
     public Book peek() {
         // code here and don't to test if it's empty
+        return null ;
     }
 
     public boolean isEmpty() {

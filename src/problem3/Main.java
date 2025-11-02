@@ -8,7 +8,7 @@ public class Main {
     static Scanner scan = new Scanner(System.in);
     static Library library = new Library(0);
     public static void main (String[] args){
-        System.out.println("How many documents in the library: ");
+        System.out.println("How many documents in the library (more than 2): ");
         int n = scan.nextInt();
 
         library.setCapacity(n);
@@ -18,6 +18,7 @@ public class Main {
 
         library.add(doc1) ;
         library.add(doc2) ;
+
 
         printMenu();
         int choice = scan.nextInt();
@@ -55,16 +56,17 @@ public class Main {
                 break;
             case 1:
                 System.out.println("Enter the title of document: ");
-                String title = scan.next() ;
+                scan.nextLine();
+                String title = scan.nextLine() ;
 
                 System.out.println("Would you like to specify the type of document? (y or n) ");
-                String rep = scan.next();
+                String rep = scan.nextLine();
                 if (rep.equals("y")){
                     System.out.println("Please specify the type: (B(book), M(magazine) or D(dictionary)");
-                    String type = scan.next();
+                    String type = scan.nextLine();
                     if (type.equals("M")){
                         System.out.println("month: ");
-                        String month = scan.next();
+                        String month = scan.nextLine();
                         System.out.println("year: ");
                         int year = scan.nextInt();
                         Document newDoc = new Magazine(title, month, year) ;
@@ -72,29 +74,31 @@ public class Main {
                     }
                     if (type.equals("D")){
                         System.out.println("language: ");
-                        String language = scan.next();
+                        String language = scan.nextLine();
                         Document newDoc = new Dictionary(title, language) ;
                         library.add(newDoc);
                     }
                     if (type.equals("B")){
                         System.out.println("author: ");
-                        String author = scan.next();
+                        String author = scan.nextLine();
                         System.out.println("pages: ");
                         int nbrPages = scan.nextInt();
+                        scan.nextLine();
                         System.out.println("Would you like to specify the type of Book? ");
-                        String rep1 = scan.next();
+                        String rep1 = scan.nextLine();
                         if (rep1.equals("y")){
                             System.out.println("Please specify the type: (N or T)");
-                            String type1 = scan.next();
+                            String type1 = scan.nextLine();
                             if (type1.equals("N")){
                                 System.out.println("price: ");
                                 double price = scan.nextDouble();
+                                scan.nextLine();
                                 Document newDoc = new Novel(title, author , nbrPages , price) ;
                                 library.add(newDoc);
                             }
                             if (type1.equals("T")){
                                 System.out.println("level: ");
-                                String level = scan.next();
+                                String level = scan.nextLine();
                                 Document newDoc = new TextBook(title, author , nbrPages , level) ;
                                 library.add(newDoc);
                             }

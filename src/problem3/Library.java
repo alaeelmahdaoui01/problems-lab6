@@ -45,12 +45,14 @@ public class Library {
 
     public boolean add(Document doc){
         if (documents.contains(doc)){
+            System.out.println("Can't be added, already in library");
             return false ;
         }
         else if (documents.size()< capacity) {
             documents.add(doc);
             return true;
         }
+        System.out.println("Can't be added, reached max capacity");
         return false ;
 
     }

@@ -10,6 +10,13 @@ public class Document {
         this.numRec = nextRec++ ;
     }
 
+    public int getNumRec() {
+        return numRec;
+    }
+
+    public String getTitle() {
+        return title;
+    }
 
     @Override
     public String toString() {

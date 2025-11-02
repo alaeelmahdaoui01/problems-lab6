@@ -1,6 +1,5 @@
 package problem3;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 
 public class Library {
@@ -13,10 +12,18 @@ public class Library {
         this.capacity = capacity ;
     }
 
-    // getters and setters
+    public int getCapacity() {
+        return capacity;
+    }
 
-    // a document must belong to exactly one library
-    // how ?
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public ArrayList<Document> getDocuments(){
+        return documents ;
+    }
+
 
     @Override
     public String toString() {
@@ -58,7 +65,7 @@ public class Library {
 
     public Document document(int numRec){
         for (Document doc: documents){
-            if (doc.numRec == numRec){
+            if (doc.getNumRec() == numRec){
                 return doc ;
             }
         }
@@ -68,7 +75,7 @@ public class Library {
     public void displayAuthors(){
         for (Document doc : documents){
             if (doc.getClass() == Book.class ){
-                System.out.println(", "+((Book) doc).getAuthor()) ;  // or .author
+                System.out.println("- "+((Book) doc).getAuthor()) ;
             }
         }
     }

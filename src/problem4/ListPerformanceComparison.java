@@ -17,8 +17,8 @@ public class ListPerformanceComparison {
 
         System.out.println("---- Populate both lists ----");
         for (int i = 0; i < SIZE; i++) {
-            //code here
-            //code here
+            arrayList.add(i);
+            linkedList.add(i);
         }
 
         // 2️⃣ Random insertions and deletions
@@ -40,7 +40,11 @@ public class ListPerformanceComparison {
         Random random = new Random();
         long start = System.nanoTime();
 
-        // insert your code here
+        for (int i=0 ; i < OPERATIONS; i++){
+            list.add(random.nextInt(list.size()), 100);
+            list.remove(random.nextInt(list.size()));
+        }
+
 
         long end = System.nanoTime();
         System.out.printf("%s - Random insert/delete: %.3f ms%n",
@@ -54,11 +58,18 @@ public class ListPerformanceComparison {
 
         // Insertions at beginning and end
 
-        // add your code here
+        for (int i=0 ; i < OPERATIONS; i++){
+            list.add(0, 20) ;  // adding at first
+            list.add(41);  // adding element at last
+        }
 
         // Deletions at beginning and end
+        for (int i=0 ; i < OPERATIONS; i++){
+            list.remove(0) ;  // removing at first
+            list.remove(list.size() -1);// removing element at last
+        }
 
-        // add your code here
+
 
         long end = System.nanoTime();
         System.out.printf("%s - Sequential insert/delete (start/end): %.3f ms%n",
@@ -72,12 +83,43 @@ public class ListPerformanceComparison {
         long start = System.nanoTime();
 
         long sum = 0;
-        // sum of the all elements in the list
-       // insert your code here
+        for (int i = 0; i < OPERATIONS; i++) {
+            sum+= list.get(random.nextInt(list.size())) ;
+        }
 
         long end = System.nanoTime();
         System.out.printf("%s - Random access (get): %.3f ms%n",
                 name, (end - start) / 1_000_000.0);
     }
 }
+
+// Analyze the results
+// Explain why one performs better than the other in each scenario
+// based on their underlying data structures
+
+
+// output :
+// ---- Performance Comparison ----
+// ---- Populate both lists ----
+// ArrayList - Random insert/delete: 212,690 ms
+// LinkedList - Random insert/delete: 2852,278 ms
+// ArrayList - Sequential insert/delete (start/end): 306,689 ms
+// LinkedList - Sequential insert/delete (start/end): 7,509 ms
+// ArrayList - Random access (get): 3,482 ms
+// LinkedList - Random access (get): 1369,193 ms
+
+// Analyzing the results and explanation
+
+// In the random insert/delete, we notice that neither ArrayList nor LinkedList has efficient time
+// they're both slow but ArrayList remains better
+// because in ArrayList, it must shift elements after the index where there was an addition or removal
+// and in LinkedList it traverses to the wanted index
+
+// In the sequential insert/delete at beginning and end, LinkedList is clearly better and faster
+// compared to ArrayList. Because LinkedList has direct references to first and last indexes so O(1) complexity
+// meanwhile ArrayList must shift elements when adding or removing at the start, thus we have O(n) complexity
+
+// In the random access, ArrayList is clearly better and faster
+// compared to LinkedList. Because ArrayList has direct access by index so O(1) complexity
+// meanwhile LinkedList must traverse elements from start to end to reach the index, thus we have O(n) complexity
 

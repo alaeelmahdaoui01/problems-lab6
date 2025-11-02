@@ -8,6 +8,10 @@ public class Dictionary extends Document{
         this.language = language ;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
     @Override
     public String toString() {
         return super.toString() + "\nDictionary's language: " + this.language  ;

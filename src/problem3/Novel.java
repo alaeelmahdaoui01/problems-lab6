@@ -8,6 +8,7 @@ public class Novel extends Book{
         this.price = price ;
     }
 
+
     @Override
     public String toString() {
         return super.toString() + "\nNovel's price: "  + this.price;

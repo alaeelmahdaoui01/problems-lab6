@@ -6,20 +6,27 @@ import java.util.Scanner;
 
 public class Main {
     static Scanner scan = new Scanner(System.in);
+    static Library library = new Library(0);
     public static void main (String[] args){
         System.out.println("How many documents in the library: ");
         int n = scan.nextInt();
 
-        Library library = new Library(n);
+        library.setCapacity(n);
 
-        Document doc1 = new Document("josipa" );
-        Document doc2 = new Book("jsp2", "Alae", 120) ;
+        Document doc1 = new Document("Doc1" );
+        Document doc2 = new Book("Book1", "Unknown", 120) ;
 
         library.add(doc1) ;
         library.add(doc2) ;
 
-
-
+        printMenu();
+        int choice = scan.nextInt();
+        while (choice != 0)
+        {
+            dispatch(choice);
+            printMenu();
+            choice = scan.nextInt();
+        }
 
     }
 
@@ -53,7 +60,7 @@ public class Main {
                 System.out.println("Would you like to specify the type of document? (y or n) ");
                 String rep = scan.next();
                 if (rep.equals("y")){
-                    System.out.println("Please specify the type: (B, M or D)");
+                    System.out.println("Please specify the type: (B(book), M(magazine) or D(dictionary)");
                     String type = scan.next();
                     if (type.equals("M")){
                         System.out.println("month: ");
@@ -61,11 +68,13 @@ public class Main {
                         System.out.println("year: ");
                         int year = scan.nextInt();
                         Document newDoc = new Magazine(title, month, year) ;
+                        library.add(newDoc);
                     }
                     if (type.equals("D")){
                         System.out.println("language: ");
                         String language = scan.next();
                         Document newDoc = new Dictionary(title, language) ;
+                        library.add(newDoc);
                     }
                     if (type.equals("B")){
                         System.out.println("author: ");
@@ -80,43 +89,45 @@ public class Main {
                             if (type1.equals("N")){
                                 System.out.println("price: ");
                                 double price = scan.nextDouble();
+                                Document newDoc = new Novel(title, author , nbrPages , price) ;
+                                library.add(newDoc);
                             }
                             if (type1.equals("T")){
                                 System.out.println("level: ");
                                 String level = scan.next();
+                                Document newDoc = new TextBook(title, author , nbrPages , level) ;
+                                library.add(newDoc);
                             }
                         }
                         else{
                             Document newDoc = new Book(title, author, nbrPages) ;
+                            library.add(newDoc);
                         }
                     }
                 }
                 else {
                    Document newDoc = new Document(title) ;
+                    library.add(newDoc);
                 }
-
-
                 break;
-            case 2:
-                list.print();
+            case 2:  // display library
+                System.out.println(library);
                 break;
-            case 3:
-
-                System.out.println("What element do you want to add to the list? ");
-                int element = scan.nextInt();
-                list.addElement(element);
+            case 3:  // delete document
+                System.out.println("What document do you want to delete from library? (enter numReg) ");
+                int numReg = scan.nextInt();
+                Document doc = library.document(numReg);
+                if (doc != null){
+                    library.delete(doc) ;
+                }
                 break;
             case 4:
-
-                System.out.println("What element do you want to remove from the list? ");
-                int value1 = scan.nextInt();
-                list.removeFirst(value1);
+                System.out.println("What doc do you want to display? (enter numReg) ");
+                numReg = scan.nextInt();
+                System.out.println(library.document(numReg));
                 break;
-            case 5:
-
-                System.out.println("What value do you want to remove from the list? ");
-                int value2 = scan.nextInt();
-                list.removeAll(value2);
+            case 5: // display authors
+                library.displayAuthors();
                 break;
             default:
                 System.out.println("Sorry, invalid choice");

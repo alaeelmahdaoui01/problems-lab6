@@ -10,6 +10,10 @@ public class Book extends Document{
         this.nbrPages = nbrPages ;
     }
 
+    public int getNbrPages() {
+        return nbrPages;
+    }
+
     public String getAuthor(){
         return author ;
     }
